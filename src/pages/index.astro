@@ -1,0 +1,148 @@
+---
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<html lang="en" class="h-full scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyBot</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="min-h-screen bg-[#0A0F1C] font-['Plus_Jakarta_Sans'] text-white overflow-x-hidden"
+  >
+    <!-- Navbar -->
+    <Navbar />
+
+    <!-- Hero Section -->
+    <main class="pt-32 pb-24">
+      <div class="max-w-7xl mx-auto">
+        <!-- Main Hero -->
+        <div class="relative">
+          <!-- Background Elements -->
+          <div class="absolute inset-0 -z-10">
+            <div
+              class="absolute top-0 -left-4 w-72 h-72 bg-[#4D7EF2] rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"
+            >
+            </div>
+            <div
+              class="absolute top-0 -right-4 w-72 h-72 bg-[#5D3EDE] rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"
+            >
+            </div>
+            <div
+              class="absolute -bottom-8 left-20 w-72 h-72 bg-[#7B61FF] rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"
+            >
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+              <h1
+                class="text-5xl md:text-7xl font-bold leading-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+              >
+                Power Up Your Discord Server
+              </h1>
+              <p class="text-gray-400 text-lg leading-relaxed">
+                Customize your Discord experience with MyBot's powerful
+                dashboard. Easy to set up, easier to use.
+              </p>
+              <div class="flex gap-4">
+                <button
+                  class="bg-gradient-to-r from-[#4D7EF2] to-[#5D3EDE] px-8 py-4 rounded-2xl font-semibold shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all hover:scale-105"
+                >
+                  Add to Discord
+                </button>
+              </div>
+            </div>
+            <div class="relative">
+              <div
+                class="bg-gradient-to-r from-[#4D7EF2]/10 to-[#5D3EDE]/10 rounded-3xl p-1"
+              >
+                <div class="bg-[#0A0F1C] rounded-2xl p-6 backdrop-blur-xl">
+                  <img
+                    src="/image.png"
+                    alt="Dashboard Preview"
+                    class="rounded-xl shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="mt-32" id="features">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4">Why Choose MyBot?</h2>
+            <p class="text-gray-400">
+              Powerful features to enhance your Discord community
+            </p>
+          </div>
+          <div class="grid md:grid-cols-3 gap-8">
+            {
+              [
+                {
+                  title: "Easy Setup",
+                  description:
+                    "Get started in minutes with our intuitive dashboard",
+                  icon: "⚡",
+                },
+                {
+                  title: "Custom Commands",
+                  description: "Create and manage custom commands easily",
+                  icon: "🎮",
+                },
+                {
+                  title: "Auto Moderation",
+                  description: "Keep your server safe automatically",
+                  icon: "🛡️",
+                },
+              ].map((feature) => (
+                <div class="group bg-gradient-to-r from-white/5 to-white/[0.02] rounded-3xl p-6 hover:bg-white/10 transition-all duration-500 border border-white/10">
+                  <div class="bg-gradient-to-r from-[#4D7EF2] to-[#5D3EDE] w-12 h-12 rounded-2xl flex items-center justify-center mb-4 text-2xl shadow-lg">
+                    {feature.icon}
+                  </div>
+                  <h3 class="text-xl font-semibold mb-2">{feature.title}</h3>
+                  <p class="text-gray-400">{feature.description}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <Footer />
+
+    <style>
+      @keyframes blob {
+        0% {
+          transform: translate(0px, 0px) scale(1);
+        }
+        33% {
+          transform: translate(30px, -50px) scale(1.1);
+        }
+        66% {
+          transform: translate(-20px, 20px) scale(0.9);
+        }
+        100% {
+          transform: translate(0px, 0px) scale(1);
+        }
+      }
+      .animate-blob {
+        animation: blob 7s infinite;
+      }
+      .animation-delay-2000 {
+        animation-delay: 2s;
+      }
+      .animation-delay-4000 {
+        animation-delay: 4s;
+      }
+    </style>
+  </body>
+</html>

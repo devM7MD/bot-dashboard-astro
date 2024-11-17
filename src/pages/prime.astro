@@ -1,0 +1,298 @@
+---
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premium Plans - MyBot</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-[#0B101B] font-['Plus_Jakarta_Sans'] text-white">
+    <Navbar />
+
+    <!-- Main Content -->
+    <main class="pt-32 pb-24">
+      <div class="max-w-7xl mx-auto px-6">
+        <!-- Header -->
+        <div class="text-center mb-16">
+          <h1 class="text-4xl md:text-5xl font-bold mb-4">
+            Choose Your Perfect Plan
+          </h1>
+          <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+            Unlock the full potential of your Discord server with our premium
+            features
+          </p>
+        </div>
+
+        <!-- Billing Toggle -->
+        <div class="flex justify-center items-center gap-4 mb-16">
+          <span class="text-gray-400 text-sm">Monthly</span>
+          <button
+            class="relative w-12 h-6 rounded-full bg-[#1E2332] group cursor-pointer"
+            id="billingToggle"
+          >
+            <div
+              class="absolute w-5 h-5 rounded-full bg-[#5865F2] left-0.5 top-0.5 transition-transform duration-200"
+            >
+            </div>
+          </button>
+          <div class="flex items-center gap-2">
+            <span class="text-sm">Annually</span>
+            <span
+              class="text-xs bg-[#5865F2]/20 text-[#5865F2] px-2 py-0.5 rounded-full font-medium"
+            >
+              Save 20%
+            </span>
+          </div>
+        </div>
+
+        <!-- Pricing Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+          <!-- Free Plan -->
+          <div class="bg-[#1E2332] rounded-2xl p-6 border border-white/5">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h3 class="text-xl font-bold mb-1">Free</h3>
+                <p class="text-gray-400 text-sm">Perfect to get started</p>
+              </div>
+              <span class="text-2xl">🎈</span>
+            </div>
+            <div class="mb-6">
+              <div class="text-3xl font-bold">$0</div>
+              <div class="text-gray-400 text-sm">Forever free</div>
+            </div>
+            <button
+              class="w-full bg-white/5 hover:bg-white/10 border border-white/10 text-white h-11 rounded-lg font-medium transition-colors mb-8"
+            >
+              Get Started Free
+            </button>
+            <ul class="space-y-4">
+              {
+                [
+                  "Basic commands",
+                  "Server statistics",
+                  "1 Custom command",
+                  "5 seconds cooldown",
+                  "12-hour support",
+                ].map((feature) => (
+                  <li class="flex items-start gap-3 text-sm text-gray-300">
+                    <svg
+                      class="w-5 h-5 text-[#5865F2] shrink-0 mt-0.5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                    {feature}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <!-- Gold Plan -->
+          <div
+            class="bg-[#1E2332] rounded-2xl p-6 border border-[#5865F2]/50 relative"
+          >
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+              <span
+                class="bg-[#5865F2] text-xs font-medium px-3 py-1 rounded-full"
+              >
+                Most Popular
+              </span>
+            </div>
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h3 class="text-xl font-bold mb-1">Gold</h3>
+                <p class="text-gray-400 text-sm">For growing communities</p>
+              </div>
+              <span class="text-2xl">👑</span>
+            </div>
+            <div class="mb-6">
+              <div class="text-3xl font-bold" id="goldPrice">$9.99</div>
+              <div class="text-gray-400 text-sm" id="goldPeriod">per month</div>
+            </div>
+            <button
+              class="w-full bg-[#5865F2] hover:bg-[#4752C4] text-white h-11 rounded-lg font-medium transition-colors mb-8"
+            >
+              Get Gold
+            </button>
+            <ul class="space-y-4">
+              {
+                [
+                  "Everything in Free",
+                  "Advanced analytics",
+                  "10 Custom commands",
+                  "2 seconds cooldown",
+                  "4-hour support",
+                  "Custom welcome messages",
+                  "Auto-moderation",
+                  "Custom role management",
+                ].map((feature) => (
+                  <li class="flex items-start gap-3 text-sm text-gray-300">
+                    <svg
+                      class="w-5 h-5 text-[#5865F2] shrink-0 mt-0.5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                    {feature}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <!-- Diamond Plan -->
+          <div class="bg-[#1E2332] rounded-2xl p-6 border border-white/5">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h3 class="text-xl font-bold mb-1">Diamond</h3>
+                <p class="text-gray-400 text-sm">Ultimate power</p>
+              </div>
+              <span class="text-2xl">💎</span>
+            </div>
+            <div class="mb-6">
+              <div class="text-3xl font-bold" id="diamondPrice">$24.99</div>
+              <div class="text-gray-400 text-sm" id="diamondPeriod">
+                per month
+              </div>
+            </div>
+            <button
+              class="w-full bg-white/5 hover:bg-white/10 border border-white/10 text-white h-11 rounded-lg font-medium transition-colors mb-8"
+            >
+              Get Diamond
+            </button>
+            <ul class="space-y-4">
+              {
+                [
+                  "Everything in Gold",
+                  "Unlimited commands",
+                  "No cooldown",
+                  "Priority 1-hour support",
+                  "Custom bot branding",
+                  "Voice commands",
+                  "Advanced automation",
+                  "API access",
+                  "Account manager",
+                  "Early features access",
+                ].map((feature) => (
+                  <li class="flex items-start gap-3 text-sm text-gray-300">
+                    <svg
+                      class="w-5 h-5 text-[#5865F2] shrink-0 mt-0.5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                    {feature}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="text-center mb-16">
+          <h2 class="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
+          <p class="text-gray-400">
+            Everything you need to know about our pricing plans
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          {
+            [
+              {
+                q: "Can I switch plans at any time?",
+                a: "Yes, you can upgrade or downgrade your plan at any time. Changes will be reflected in your next billing cycle.",
+              },
+              {
+                q: "Do you offer refunds?",
+                a: "We offer a 7-day money-back guarantee for all premium plans. No questions asked!",
+              },
+              {
+                q: "What payment methods do you accept?",
+                a: "We accept all major credit cards, PayPal, and crypto payments through our secure payment system.",
+              },
+              {
+                q: "Is there a setup fee?",
+                a: "No, there are no hidden fees or setup costs. You only pay the advertised price for your chosen plan.",
+              },
+            ].map((faq) => (
+              <div class="bg-[#1E2332] rounded-xl p-6">
+                <h3 class="font-semibold mb-2">{faq.q}</h3>
+                <p class="text-gray-400 text-sm">{faq.a}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </main>
+
+    <Footer />
+
+    <script>
+      // Billing toggle functionality
+      const billingToggle = document.getElementById("billingToggle");
+      const toggleButton = billingToggle.querySelector("div");
+      const goldPrice = document.getElementById("goldPrice");
+      const goldPeriod = document.getElementById("goldPeriod");
+      const diamondPrice = document.getElementById("diamondPrice");
+      const diamondPeriod = document.getElementById("diamondPeriod");
+      let isAnnual = false;
+
+      billingToggle.addEventListener("click", () => {
+        isAnnual = !isAnnual;
+        toggleButton.style.transform = isAnnual
+          ? "translateX(24px)"
+          : "translateX(0)";
+
+        // Update prices with animation
+        const elements = [goldPrice, diamondPrice];
+        elements.forEach((el) => {
+          el.style.transform = "translateY(-10px)";
+          el.style.opacity = "0";
+        });
+
+        setTimeout(() => {
+          goldPrice.textContent = isAnnual ? "$95.90" : "$9.99";
+          goldPeriod.textContent = isAnnual ? "per year" : "per month";
+          diamondPrice.textContent = isAnnual ? "$239.90" : "$24.99";
+          diamondPeriod.textContent = isAnnual ? "per year" : "per month";
+
+          elements.forEach((el) => {
+            el.style.transform = "translateY(0)";
+            el.style.opacity = "1";
+          });
+        }, 200);
+      });
+    </script>
+  </body>
+</html>

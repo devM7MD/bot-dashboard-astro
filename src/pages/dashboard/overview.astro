@@ -1,0 +1,146 @@
+---
+/*
+    This page should user see it 1st when they login.
+*/
+import Sidebar from "../../components/Sidebar.astro";
+---
+
+<html lang="en" class="h-full scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Overview - MyBot</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="h-full bg-[#0A0F1C] font-['Plus_Jakarta_Sans']">
+    <!-- Sidebar -->
+    <Sidebar />
+    <!-- Main Content -->
+    <main class="lg:ml-64 min-h-screen text-white">
+      <div class="p-6">
+        <!-- Header -->
+        <div class="mb-8">
+          <h1 class="text-2xl font-bold mb-2">Welcome back, Alex! 👋</h1>
+          <p class="text-gray-400">Here's your current status.</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          {
+            [
+              {
+                label: "Credits",
+                value: "0",
+                change: "Start earning!",
+                icon: "💎",
+                color: "from-[#4D7EF2] to-[#5D3EDE]",
+              },
+              {
+                label: "Level",
+                value: "1",
+                change: "Keep going!",
+                icon: "⭐",
+                color: "from-[#4D7EF2] to-[#5D3EDE]",
+              },
+              {
+                label: "Reputation",
+                value: "0",
+                change: "Be active to earn",
+                icon: "🏆",
+                color: "from-[#4D7EF2] to-[#5D3EDE]",
+              },
+            ].map((stat) => (
+              <div class="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:border-[#4D7EF2]/30 transition-all group">
+                <div class="flex justify-between items-start mb-4">
+                  <div>
+                    <div class="text-gray-400 text-sm font-medium mb-1">
+                      {stat.label}
+                    </div>
+                    <div class="text-2xl font-bold">{stat.value}</div>
+                  </div>
+                  <div
+                    class={`bg-gradient-to-tr ${stat.color} p-2 rounded-lg group-hover:scale-110 transition-all`}
+                  >
+                    <span class="text-xl">{stat.icon}</span>
+                  </div>
+                </div>
+                <div class="text-sm text-gray-400">{stat.change}</div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </main>
+    <style>
+      /* Custom Scrollbar */
+      .custom-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(77, 126, 242, 0.3) transparent;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: rgba(77, 126, 242, 0.3);
+        border-radius: 20px;
+      }
+    </style>
+    <script>
+      // Enhanced dropdown functionality
+      document.querySelectorAll("[data-dropdown]").forEach((button) => {
+        const dropdown = button.nextElementSibling;
+        const arrow = button.querySelector("svg");
+        let isOpen = false;
+
+        button.addEventListener("click", () => {
+          isOpen = !isOpen;
+          if (isOpen) {
+            dropdown.classList.remove("hidden");
+            arrow.style.transform = "rotate(180deg)";
+            // Add slide down animation
+            dropdown.style.opacity = "0";
+            dropdown.style.transform = "translateY(-10px)";
+            requestAnimationFrame(() => {
+              dropdown.style.transition = "all 0.2s ease-out";
+              dropdown.style.opacity = "1";
+              dropdown.style.transform = "translateY(0)";
+            });
+          } else {
+            // Add slide up animation
+            dropdown.style.transition = "all 0.2s ease-in";
+            dropdown.style.opacity = "0";
+            dropdown.style.transform = "translateY(-10px)";
+            setTimeout(() => {
+              dropdown.classList.add("hidden");
+              arrow.style.transform = "rotate(0deg)";
+            }, 200);
+          }
+        });
+      });
+
+      // Mobile menu functionality
+      const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+      const sidebar = document.getElementById("sidebar");
+
+      mobileMenuBtn.addEventListener("click", () => {
+        const isOpen = sidebar.classList.contains("translate-x-0");
+        if (isOpen) {
+          sidebar.classList.remove("translate-x-0");
+          sidebar.classList.add("-translate-x-full");
+        } else {
+          sidebar.classList.remove("-translate-x-full");
+          sidebar.classList.add("translate-x-0");
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,268 @@
+---
+// src/components/Sidebar.astro
+import { SiTestin } from "react-icons/si";
+
+const currentPath = Astro.url.pathname;
+
+const isActive = (path: string) => {
+  return currentPath.startsWith(path);
+};
+---
+
+<aside
+  class="fixed top-0 left-0 z-40 h-full w-64 -translate-x-full lg:translate-x-0 transition-transform duration-300"
+  id="sidebar"
+>
+  <div
+    class="h-full bg-white/5 backdrop-blur-xl border-r border-white/10 flex flex-col"
+  >
+    <!-- Logo Section -->
+    <div class="p-6 border-b border-white/10">
+      <div class="flex items-center gap-3">
+        <div
+          class="bg-gradient-to-tr from-[#4D7EF2] to-[#5D3EDE] p-2 rounded-xl"
+        >
+          <svg
+            class="w-6 h-6 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+        </div>
+        <span class="font-bold text-xl text-white">MyBot</span>
+      </div>
+    </div>
+
+    <!-- User Profile -->
+    <div class="p-6 border-b border-white/10">
+      <div class="flex items-center gap-4">
+        <div class="relative">
+          <img
+            src="/discord-v2-svgrepo-com.svg"
+            alt="User Avatar"
+            class="w-10 h-10 rounded-full"
+          />
+          <div
+            class="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-[#0A0F1C]"
+          >
+          </div>
+        </div>
+        <div>
+          <h3 class="text-white font-medium">Alex Mitchell</h3>
+          <span class="text-gray-400 text-sm">Free User</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex-1 py-4 overflow-y-auto">
+      <!-- Main Navigation -->
+      <div class="px-4 mb-4">
+        <h4 class="text-xs font-semibold text-gray-400 uppercase px-2 mb-2">
+          Navigation
+        </h4>
+        <nav class="space-y-1">
+          <a
+            href="/dashboard/overview"
+            class={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+              isActive("/dashboard/overview")
+                ? "bg-gradient-to-r from-[#4D7EF2] to-[#5D3EDE] text-white"
+                : "text-gray-400 hover:bg-white/5"
+            }`}
+          >
+            <span class="text-xl">📊</span>
+            Overview
+          </a>
+
+          <a
+            href="/dashboard/commands"
+            class={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+              isActive("/dashboard/commands")
+                ? "bg-gradient-to-r from-[#4D7EF2] to-[#5D3EDE] text-white"
+                : "text-gray-400 hover:bg-white/5"
+            }`}
+          >
+            <span class="text-xl">⌨️</span>
+            Commands
+          </a>
+
+          <div class="relative group" id="serversDropdown">
+            <button
+              class="w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:bg-white/5 transition-all group"
+              data-dropdown="servers"
+            >
+              <div class="flex items-center gap-3">
+                <span class="text-xl">🖥️</span>
+                Servers
+              </div>
+              <svg
+                class="w-4 h-4 transition-transform duration-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+
+            <div class="hidden mt-2 ml-4 space-y-1 servers-dropdown">
+              {
+                [
+                  {
+                    name: "Gaming Hub",
+                    image: "/api/placeholder/32/32",
+                    status: "online",
+                    members: "100.9k memebr",
+                  },
+                  {
+                    name: "Study Group",
+                    image: "/api/placeholder/32/32",
+                    status: "online",
+                    members: "5.7k memebr",
+                  },
+                  {
+                    name: "Movie Club",
+                    image: "/api/placeholder/32/32",
+                    status: "maintenance",
+                    members: "8.8k memebr",
+                  },
+                ].map((server) => (
+                  <a
+                    href="#"
+                    class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 transition-all group/server"
+                  >
+                    <div class="relative">
+                      <img
+                        src="/test.svg"
+                        class="w-5 h-5 rounded-full"
+                        alt="image"
+                      />
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <div class="font-medium text-white truncate">
+                        {server.name}
+                      </div>
+                    </div>
+                    <div class="opacity-0 group-hover/server:opacity-100 transition-opacity">
+                      <svg
+                        class="w-4 h-4 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </div>
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+
+          <a
+            href="#"
+            class={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+              isActive("/dashboard/settings")
+                ? "bg-gradient-to-r from-[#4D7EF2] to-[#5D3EDE] text-white"
+                : "text-gray-400 hover:bg-white/5"
+            }`}
+          >
+            <span class="text-xl">⚙️</span>
+            Settings
+          </a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="p-4">
+      <div
+        class="relative overflow-hidden bg-gradient-to-br from-[#4D7EF2]/10 to-[#5D3EDE]/10 rounded-xl p-4 border border-[#4D7EF2]/20"
+      >
+        <!-- Animated background effect -->
+        <div
+          class="absolute -top-12 -right-12 w-24 h-24 bg-gradient-to-r from-[#4D7EF2] to-[#5D3EDE] rounded-full opacity-20 blur-xl animate-pulse"
+        >
+        </div>
+
+        <div class="relative">
+          <div class="flex items-center gap-2 mb-1">
+            <h3 class="text-white font-medium">Upgrade to Premium</h3>
+            <span
+              class="text-center bg-[#4D7EF2]/20 text-[#4D7EF2] px-2 py-0.5 rounded-full"
+              >50% OFF</span
+            >
+          </div>
+          <p class="text-gray-400 text-sm mb-3">Unlock exclusive features!</p>
+          <a href="/prime">
+            <button
+              class="w-full bg-gradient-to-r from-[#4D7EF2] to-[#5D3EDE] px-4 py-2.5 rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-[#4D7EF2]/20 transition-all flex items-center justify-center gap-2 group"
+            >
+              <span>Upgrade Now</span>
+              <svg
+                class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </button></a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<script>
+  // Servers dropdown functionality
+  const serversButton = document.getElementById("serversButton");
+  const serversList = document.getElementById("serversList");
+  const serverArrow = serversButton?.querySelector("svg");
+  let isServersOpen = false;
+
+  serversButton?.addEventListener("click", () => {
+    isServersOpen = !isServersOpen;
+    if (isServersOpen) {
+      serversList?.classList.remove("hidden");
+      serverArrow?.classList.add("rotate-180");
+    } else {
+      serversList?.classList.add("hidden");
+      serverArrow?.classList.remove("rotate-180");
+    }
+  });
+
+  // Mobile menu functionality
+  const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+  const sidebar = document.getElementById("sidebar");
+
+  mobileMenuBtn?.addEventListener("click", () => {
+    const isOpen = sidebar?.classList.contains("translate-x-0");
+    if (isOpen) {
+      sidebar?.classList.remove("translate-x-0");
+      sidebar?.classList.add("-translate-x-full");
+    } else {
+      sidebar?.classList.remove("-translate-x-full");
+      sidebar?.classList.add("translate-x-0");
+    }
+  });
+</script>

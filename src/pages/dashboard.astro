@@ -1,0 +1,224 @@
+---
+// src/pages/overview.astro
+---
+
+<html lang="en" class="h-full scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Overview - MyBot</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="h-full bg-[#0A0F1C] font-['Plus_Jakarta_Sans']">
+    <!-- Mobile Menu Button - Only visible on mobile -->
+    <button
+      id="mobileMenuBtn"
+      class="fixed top-4 right-4 z-50 lg:hidden bg-white/5 p-2 rounded-lg border border-white/10"
+    >
+      <svg
+        class="w-6 h-6 text-white"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+
+    <!-- Sidebar -->
+    <aside
+      class="fixed top-0 left-0 z-40 h-full w-64 -translate-x-full lg:translate-x-0 transition-transform duration-300"
+      id="sidebar"
+    >
+      <div
+        class="h-full bg-white/5 backdrop-blur-xl border-r border-white/10 flex flex-col"
+      >
+        <!-- Logo Section -->
+        <div class="p-6 border-b border-white/10">
+          <div class="flex items-center gap-3">
+            <div
+              class="bg-gradient-to-tr from-[#4D7EF2] to-[#5D3EDE] p-2 rounded-xl"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <span class="font-bold text-xl text-white">MyBot</span>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="flex-1 p-4 space-y-2">
+          {
+            [
+              { label: "Overview", icon: "📊", active: true },
+              { label: "Commands", icon: "⌨️", soon: true },
+              { label: "Analytics", icon: "📈", locked: true },
+              { label: "Settings", icon: "⚙️", locked: true },
+            ].map((item) => (
+              <a
+                href="#"
+                class={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                  item.active
+                    ? "bg-gradient-to-r from-[#4D7EF2] to-[#5D3EDE] text-white"
+                    : "text-gray-400 hover:bg-white/5"
+                } ${item.locked || item.soon ? "opacity-50 cursor-not-allowed" : ""}`}
+              >
+                <span class="text-xl">{item.icon}</span>
+                <span>{item.label}</span>
+                {item.soon && (
+                  <span class="ml-auto text-xs bg-[#4D7EF2]/20 text-[#4D7EF2] px-2 py-1 rounded-full">
+                    Soon
+                  </span>
+                )}
+                {item.locked && (
+                  <svg
+                    class="w-4 h-4 ml-auto"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                    />
+                  </svg>
+                )}
+              </a>
+            ))
+          }
+        </nav>
+
+        <!-- Login CTA -->
+        <div class="p-4">
+          <div
+            class="bg-gradient-to-br from-[#4D7EF2]/10 to-[#5D3EDE]/10 rounded-xl p-4 border border-[#4D7EF2]/20"
+          >
+            <h3 class="font-semibold text-white mb-2">Login Required</h3>
+            <p class="text-gray-400 text-sm mb-4">
+              Sign in with Discord to access all features
+            </p>
+            <button
+              class="w-full bg-[#5865F2] hover:bg-[#4752C4] px-4 py-2.5 rounded-lg font-medium text-white transition-colors flex items-center justify-center gap-2"
+            >
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"
+                ></path>
+              </svg>
+              Login with Discord
+            </button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="lg:ml-64 min-h-screen text-white">
+      <div class="p-6">
+        <!-- Login Required State -->
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center py-20">
+            <div
+              class="bg-gradient-to-tr from-[#4D7EF2] to-[#5D3EDE] w-20 h-20 rounded-2xl mx-auto mb-8 flex items-center justify-center"
+            >
+              <svg
+                class="w-10 h-10 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                ></path>
+              </svg>
+            </div>
+            <h1 class="text-3xl font-bold mb-4">Welcome to MyBot</h1>
+            <p class="text-gray-400 mb-8 max-w-lg mx-auto">
+              Login with Discord to access your dashboard, manage your server
+              settings, and unlock powerful features.
+            </p>
+
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+              {
+                [
+                  {
+                    icon: "🚀",
+                    title: "Easy Setup",
+                    description:
+                      "Get started in minutes with our intuitive dashboard",
+                  },
+                  {
+                    icon: "⚡",
+                    title: "Powerful Commands",
+                    description:
+                      "Access a wide range of moderation and utility commands",
+                  },
+                  {
+                    icon: "📊",
+                    title: "Detailed Analytics",
+                    description: "Track your server's growth and engagement",
+                  },
+                ].map((feature) => (
+                  <div class="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+                    <div class="bg-gradient-to-tr from-[#4D7EF2]/20 to-[#5D3EDE]/20 w-12 h-12 rounded-lg flex items-center justify-center mb-4 mx-auto">
+                      <span class="text-2xl">{feature.icon}</span>
+                    </div>
+                    <h3 class="font-semibold mb-2">{feature.title}</h3>
+                    <p class="text-gray-400 text-sm">{feature.description}</p>
+                  </div>
+                ))
+              }
+            </div>
+
+            <button
+              class="bg-[#5865F2] hover:bg-[#4752C4] px-8 py-3 rounded-xl font-medium transition-all flex items-center gap-3 mx-auto"
+            >
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"
+                ></path>
+              </svg>
+              Get Started with Discord
+            </button>
+            <div class="m-2"></div>
+            <a href="/dashboard/overview/">
+              <button
+                class="bg-[#5865F2] hover:bg-[#4752C4] px-8 py-3 rounded-xl font-medium transition-all flex items-center gap-3 mx-auto"
+              >
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"
+                  ></path>
+                </svg>
+                Click here to see design on login mode
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
