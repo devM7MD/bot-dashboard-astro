@@ -9,11 +9,11 @@
 </p>
 
 <p align="center">
-  <a href="#features">Features</a> •
-  <a href="#screenshots">Screenshots</a> •
-  <a href="#getting-started">Getting Started</a> •
-  <a href="#tech-stack">Tech Stack</a> •
-  <a href="#deployment">Deployment</a>
+  <a href="#-features">Features</a> •
+  <a href="#-screenshots">Screenshots</a> •
+  <a href="#-getting-started">Getting Started</a> •
+  <a href="#-tech-stack">Tech Stack</a> •
+  <a href="#-deployment">Deployment</a>
 </p>
 
 <div align="center">
