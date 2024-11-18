@@ -1,4 +1,4 @@
-# <p align="center">MyBot Dashboard 🤖</p>
+# <p align="center">Discord Bot Dashboard Using Astro :robot:</p>
 
 <p align="center">
   <img src="https://github.com/devM7MD/bot-dashboard-astro/blob/main/screenshots/overview.png" alt="MyBot Dashboard Logo" width="1980" />
@@ -95,7 +95,7 @@ npm run dev
 pnpm dev
 ```
 
-The application will be available at `http://localhost:3000`
+The application will be available at `http://localhost:4321`
 
 ## 🛠 Tech Stack
 
