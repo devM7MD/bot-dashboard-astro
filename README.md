@@ -66,36 +66,75 @@
 
 ### Installation
 
-1. Clone the repository
+**Important Note:** The backend server must be running for the dashboard to manage commands and settings. Due to current environment limitations with `run_in_bash_session` (specifically `getcwd()` errors), the backend's `npm install` and startup commands could not be verified by the AI. Please ensure you can run these commands successfully in your local environment.
+
+**1. Clone the Repository**
 ```bash
 git clone https://github.com/devM7MD/bot-dashboard-astro.git
-cd mybot-dashboard
+cd bot-dashboard-astro
 ```
 
-2. Install dependencies
-```bash
-# Using npm
-npm install
+**2. Backend Setup**
 
-# Using pnpm
-pnpm install
-```
+The backend server handles API requests for managing commands and settings.
 
-3. Create environment variables
-```bash
-cp .env.example .env
-```
+   a. Navigate to the backend directory:
+      ```bash
+      cd backend
+      ```
 
-4. Start the development server
-```bash
-# Using npm
-npm run dev
+   b. Install backend dependencies:
+      ```bash
+      # Using npm
+      npm install
+      ```
+      This will install `express` and `sqlite3` as defined in `backend/package.json`.
 
-# Using pnpm
-pnpm dev
-```
+   c. Start the backend server:
+      ```bash
+      # Using npm (runs server.js)
+      npm start
+      ```
+      Alternatively, you can run `node server.js`.
+      The backend server will start on `http://localhost:3000` by default. You should see a console message "Server is running on http://localhost:3000" and "Connected to the SQLite database.". A `mydiscordbot.db` file will be created in the `backend` directory if it doesn't exist.
 
-The application will be available at `http://localhost:4321`
+**3. Frontend (Astro Dashboard) Setup**
+
+   a. Navigate back to the project root directory (if you were in the `backend` directory):
+      ```bash
+      cd ..
+      ```
+
+   b. Install frontend dependencies:
+      ```bash
+      # Using npm
+      npm install
+
+      # Using pnpm
+      pnpm install
+      ```
+
+   c. Create environment variables (if applicable for your setup, though not strictly needed for current features beyond what's in the repo):
+      ```bash
+      # cp .env.example .env
+      # Fill in .env with your specific variables if you extend the project
+      ```
+
+   d. Start the frontend development server:
+      ```bash
+      # Using npm
+      npm run dev
+
+      # Using pnpm
+      pnpm dev
+      ```
+      The Astro frontend application will be available at `http://localhost:4321`.
+
+**Frontend-Backend Interaction**
+
+*   The frontend (Astro) makes API calls to the backend (Express.js server).
+*   The API base URL is configured in the frontend scripts (e.g., in `src/pages/dashboard/commands.astro`) to point to `http://localhost:3000/api`.
+*   Ensure both the backend server (port 3000) and the frontend development server (port 4321) are running simultaneously to use the dashboard features.
 
 ## 🛠 Tech Stack
 

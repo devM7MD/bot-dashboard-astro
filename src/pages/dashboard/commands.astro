@@ -83,89 +83,34 @@ import Sidebar from "../../components/Sidebar.astro";
           </div>
         </div>
 
-        <!-- Commands Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- Example Command Card -->
-          <div class="group">
-            <div
-              class="bg-white/5 backdrop-blur-lg rounded-xl border border-white/10 hover:border-[#4D7EF2]/30 transition-all overflow-hidden"
-            >
-              <!-- Command Header -->
-              <div class="p-6 border-b border-white/10">
-                <div class="flex items-start justify-between mb-4">
-                  <div class="flex items-center gap-3">
-                    <div
-                      class="bg-gradient-to-tr from-[#4D7EF2]/20 to-[#5D3EDE]/20 p-2 rounded-lg"
-                    >
-                      <span class="text-xl">⚡</span>
-                    </div>
-                    <div>
-                      <h3 class="font-semibold text-lg">/test</h3>
-                      <p class="text-gray-400 text-sm">Basic test command</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex gap-2">
-                  <span
-                    class="px-2.5 py-1 text-xs font-medium rounded-full bg-[#4D7EF2]/20 text-[#4D7EF2]"
-                  >
-                    Utility
-                  </span>
-                  <span
-                    class="px-2.5 py-1 text-xs font-medium rounded-full bg-emerald-500/20 text-emerald-400"
-                  >
-                    User
-                  </span>
-                </div>
-              </div>
-
-              <!-- Command Details -->
-              <div class="p-6 space-y-4">
-                <div>
-                  <h4 class="text-sm font-medium text-gray-400 mb-2">
-                    Description
-                  </h4>
-                  <p class="text-sm">
-                    A simple test command to check if the bot is working
-                    properly.
-                  </p>
-                </div>
-
-                <div>
-                  <h4 class="text-sm font-medium text-gray-400 mb-2">Usage</h4>
-                  <div class="bg-white/5 rounded-lg p-3 font-mono text-sm">
-                    /test [option]
-                  </div>
-                </div>
-
-                <div>
-                  <h4 class="text-sm font-medium text-gray-400 mb-2">
-                    Cooldown
-                  </h4>
-                  <div class="flex items-center gap-2 text-sm">
-                    <svg
-                      class="w-4 h-4 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    5 seconds
-                  </div>
-                </div>
-              </div>
+        <!-- Add New Command Form -->
+        <div class="mb-8">
+          <h2 class="text-xl font-semibold mb-4">Add New Command</h2>
+          <form id="addCommandForm" class="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10 space-y-4">
+            <div>
+              <label for="commandName" class="block text-sm font-medium text-gray-300 mb-1">Command Name</label>
+              <input type="text" id="commandName" name="commandName" required class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#4D7EF2]/50">
             </div>
-          </div>
+            <div>
+              <label for="commandResponse" class="block text-sm font-medium text-gray-300 mb-1">Command Response</label>
+              <textarea id="commandResponse" name="commandResponse" rows="3" required class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#4D7EF2]/50"></textarea>
+            </div>
+            <button type="submit" class="bg-gradient-to-r from-[#4D7EF2] to-[#5D3EDE] px-6 py-2.5 rounded-lg font-semibold shadow-lg hover:shadow-blue-500/30 transition-all hover:scale-105">
+              Add Command
+            </button>
+          </form>
+          <div id="formFeedback" class="mt-3 text-sm"></div>
+        </div>
+
+        <!-- Commands Grid -->
+        <div id="commandsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Command cards will be dynamically inserted here -->
+          <p id="loadingMessage" class="text-gray-400">Loading commands...</p>
         </div>
       </div>
     </main>
     <script>
-      // Enhanced dropdown functionality
+      // Enhanced dropdown functionality (existing script)
       document.querySelectorAll("[data-dropdown]").forEach((button) => {
         const dropdown = button.nextElementSibling;
         const arrow = button.querySelector("svg");
@@ -176,7 +121,6 @@ import Sidebar from "../../components/Sidebar.astro";
           if (isOpen) {
             dropdown.classList.remove("hidden");
             arrow.style.transform = "rotate(180deg)";
-            // Add slide down animation
             dropdown.style.opacity = "0";
             dropdown.style.transform = "translateY(-10px)";
             requestAnimationFrame(() => {
@@ -185,7 +129,6 @@ import Sidebar from "../../components/Sidebar.astro";
               dropdown.style.transform = "translateY(0)";
             });
           } else {
-            // Add slide up animation
             dropdown.style.transition = "all 0.2s ease-in";
             dropdown.style.opacity = "0";
             dropdown.style.transform = "translateY(-10px)";
@@ -197,20 +140,172 @@ import Sidebar from "../../components/Sidebar.astro";
         });
       });
 
-      // Mobile menu functionality
+      // Mobile menu functionality (existing script)
       const mobileMenuBtn = document.getElementById("mobileMenuBtn");
       const sidebar = document.getElementById("sidebar");
 
-      mobileMenuBtn.addEventListener("click", () => {
-        const isOpen = sidebar.classList.contains("translate-x-0");
-        if (isOpen) {
-          sidebar.classList.remove("translate-x-0");
-          sidebar.classList.add("-translate-x-full");
-        } else {
-          sidebar.classList.remove("-translate-x-full");
-          sidebar.classList.add("translate-x-0");
+      if (mobileMenuBtn && sidebar) { // Ensure elements exist
+        mobileMenuBtn.addEventListener("click", () => {
+          const isOpen = sidebar.classList.contains("translate-x-0");
+          if (isOpen) {
+            sidebar.classList.remove("translate-x-0");
+            sidebar.classList.add("-translate-x-full");
+          } else {
+            sidebar.classList.remove("-translate-x-full");
+            sidebar.classList.add("translate-x-0");
+          }
+        });
+      }
+
+      // Command Management Script
+      const commandsGrid = document.getElementById('commandsGrid');
+      const addCommandForm = document.getElementById('addCommandForm');
+      const formFeedback = document.getElementById('formFeedback');
+      const loadingMessage = document.getElementById('loadingMessage');
+      const API_BASE_URL = 'http://localhost:3000/api'; // Assuming backend runs on port 3000
+
+      // Function to display commands
+      function displayCommands(commands) {
+        if (loadingMessage) loadingMessage.style.display = 'none';
+        commandsGrid.innerHTML = ''; // Clear existing content or loading message
+        if (commands.length === 0) {
+          commandsGrid.innerHTML = '<p class="text-gray-400">No commands found. Add one above!</p>';
+          return;
+        }
+
+        commands.forEach(command => {
+          const commandCard = `
+            <div class="group">
+              <div class="bg-white/5 backdrop-blur-lg rounded-xl border border-white/10 hover:border-[#4D7EF2]/30 transition-all overflow-hidden">
+                <div class="p-6 border-b border-white/10">
+                  <div class="flex items-start justify-between mb-2">
+                    <div class="flex items-center gap-3">
+                      <div class="bg-gradient-to-tr from-[#4D7EF2]/20 to-[#5D3EDE]/20 p-2 rounded-lg">
+                        <span class="text-xl">⚡</span>
+                      </div>
+                      <div>
+                        <h3 class="font-semibold text-lg">${command.name}</h3>
+                      </div>
+                    </div>
+                    <div class="flex gap-2">
+                      <button class="text-blue-400 hover:text-blue-300 text-xs" onclick="editCommand(${command.id}, '${command.name}', '${command.response}')">Edit</button>
+                      <button class="text-red-400 hover:text-red-300 text-xs" onclick="deleteCommand(${command.id})">Delete</button>
+                    </div>
+                  </div>
+                   <p class="text-gray-400 text-sm break-all">Response: ${command.response}</p>
+                </div>
+                <div class="p-4 text-xs text-gray-500">
+                  Command ID: ${command.id} | Created: ${new Date(command.createdAt).toLocaleDateString()}
+                </div>
+              </div>
+            </div>
+          `;
+          commandsGrid.insertAdjacentHTML('beforeend', commandCard);
+        });
+      }
+
+      // Function to fetch commands
+      async function fetchCommands() {
+        try {
+          const response = await fetch(\`\${API_BASE_URL}/commands\`);
+          if (!response.ok) {
+            throw new Error(\`HTTP error! status: \${response.status}\`);
+          }
+          const commands = await response.json();
+          displayCommands(commands);
+        } catch (error) {
+          console.error('Error fetching commands:', error);
+          if (loadingMessage) loadingMessage.style.display = 'none';
+          commandsGrid.innerHTML = '<p class="text-red-400">Error loading commands. Make sure the backend is running.</p>';
+        }
+      }
+
+      // Function to add a new command
+      addCommandForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const name = document.getElementById('commandName').value;
+        const response = document.getElementById('commandResponse').value;
+        formFeedback.textContent = '';
+
+        try {
+          const res = await fetch(\`\${API_BASE_URL}/commands\`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, response }),
+          });
+          const result = await res.json();
+          if (!res.ok) {
+            throw new Error(result.error || \`HTTP error! status: \${res.status}\`);
+          }
+          formFeedback.textContent = 'Command added successfully!';
+          formFeedback.className = 'text-green-400 text-sm mt-3';
+          addCommandForm.reset();
+          fetchCommands(); // Refresh the list
+        } catch (error) {
+          console.error('Error adding command:', error);
+          formFeedback.textContent = \`Error: \${error.message}\`;
+          formFeedback.className = 'text-red-400 text-sm mt-3';
         }
       });
+
+      // Placeholder for editCommand function
+      window.editCommand = function(id, currentName, currentResponse) {
+        // Implement edit functionality, e.g., open a modal with a form
+        const newName = prompt(\`Enter new name for command (ID: \${id}):\`, currentName);
+        if (newName === null) return; // User cancelled
+        const newResponse = prompt(\`Enter new response for command (ID: \${id}):\`, currentResponse);
+        if (newResponse === null) return; // User cancelled
+
+        if (newName.trim() === '' || newResponse.trim() === '') {
+            alert('Command name and response cannot be empty.');
+            return;
+        }
+
+        fetch(\`\${API_BASE_URL}/commands/\${id}\`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: newName, response: newResponse }),
+        })
+        .then(res => {
+          if (!res.ok) {
+            return res.json().then(err => { throw new Error(err.error || 'Failed to update command'); });
+          }
+          return res.json();
+        })
+        .then(data => {
+          alert(data.message || 'Command updated successfully!');
+          fetchCommands(); // Refresh list
+        })
+        .catch(error => {
+          console.error('Error updating command:', error);
+          alert(\`Error updating command: \${error.message}\`);
+        });
+      }
+
+      // Placeholder for deleteCommand function
+      window.deleteCommand = function(id) {
+        if (!confirm(\`Are you sure you want to delete command ID: \${id}?\`)) {
+          return;
+        }
+        fetch(\`\${API_BASE_URL}/commands/\${id}\`, { method: 'DELETE' })
+        .then(res => {
+          if (!res.ok) {
+            return res.json().then(err => { throw new Error(err.error || 'Failed to delete command'); });
+          }
+          return res.json();
+        })
+        .then(data => {
+          alert(data.message || 'Command deleted successfully!');
+          fetchCommands(); // Refresh list
+        })
+        .catch(error => {
+          console.error('Error deleting command:', error);
+          alert(\`Error deleting command: \${error.message}\`);
+        });
+      }
+
+      // Initial fetch of commands when the page loads
+      document.addEventListener('DOMContentLoaded', fetchCommands);
     </script>
   </body>
 </html>

@@ -1,0 +1,27 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+coverage/
+
+# Backend specific
+backend/node_modules/
+backend/package-lock.json
+backend/npm-debug.log
+backend/yarn-error.log
+backend/coverage/
+backend/database.sqlite # If using SQLite and want to ignore the db file
+
+# Astro
+dist/
+.astro/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
